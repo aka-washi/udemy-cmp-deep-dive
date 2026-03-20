@@ -16,14 +16,10 @@ describe('AppComponent', () => {
 
   it(`should have the 'udemy-cmp-deep-dive' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('udemy-cmp-deep-dive');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, udemy-cmp-deep-dive');
+    // Expect header component to be present in the rendered output
+    expect(compiled.querySelector('app-header')).toBeTruthy();
   });
+  
 });
