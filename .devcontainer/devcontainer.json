@@ -1,0 +1,26 @@
+{
+  "name": "udemy-cmp-deep-dive Dev Container",
+  "image": "localhost:5000/rdg-node:1.0.0",
+  "remoteUser": "vscode",
+  "runArgs": [
+    "--name", "deep-dive-container"
+  ],
+  "forwardPorts": [4200],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode"
+      ],
+      "settings": {
+        "terminal.integrated.profiles.linux": {
+          "bash": {
+            "path": "/bin/bash"
+          }
+        },
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  },
+  "postCreateCommand": "npm install -g @angular/cli@21 && npm install --legacy-peer-deps"
+}
