@@ -11,11 +11,12 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './new-ticket.component.css',
 })
 export class NewTicketComponent {
-
+  form
   // Alternatively to two-way binding, we can also use template reference variables to access the input values on submit.
   onSubmit(titleInput: string, requestInput: string) {
     const title = titleInput;
     const request = requestInput;
     console.log({ title, request });
+    form.reset();
   }
 }
