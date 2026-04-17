@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnDestroy, OnInit, signal } from '@angular/core';
 
 @Component({
   selector: 'app-server-status',
@@ -7,15 +7,16 @@ import { Component, OnDestroy, OnInit, signal } from '@angular/core';
   templateUrl: './server-status.component.html',
   styleUrl: './server-status.component.css',
 })
-export class ServerStatusComponent implements OnInit, OnDestroy {
+export class ServerStatusComponent implements OnInit {
   currentStatus = signal<'online' | 'offline' | 'unknown'>('offline');
-  private intervalId?: ReturnType<typeof setInterval>;
+  //private intervalId?: ReturnType<typeof setInterval>;
+  private destroyRef = inject(DestroyRef); // alternative to OnDestroy on newer Angular versions
 
   constructor() {}
 
   ngOnInit() {
     // Simulate fetching server status from an API
-    this.intervalId = setInterval(() => {
+    const intervalId = setInterval(() => {
       const rnd = Math.random();
 
       if (rnd < 0.5) {
@@ -26,12 +27,17 @@ export class ServerStatusComponent implements OnInit, OnDestroy {
         this.currentStatus.set('unknown');
       }
     }, 5000);
+
+    this.destroyRef.onDestroy(() => {
+      // Clean up the interval when the component is destroyed
+        clearInterval(intervalId);
+    });
   }
 
-    ngOnDestroy(): void {
-    if (this.intervalId) {
-      clearInterval(this.intervalId);
-    }
-  }
+  //   ngOnDestroy(): void {
+  //   if (this.intervalId) {
+  //     clearInterval(this.intervalId);
+  //   }
+  // }
 
 }
