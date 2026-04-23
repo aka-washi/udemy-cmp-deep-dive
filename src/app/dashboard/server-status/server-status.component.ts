@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, effect, inject, OnDestroy, OnInit, signal } from '@angular/core';
 
 @Component({
   selector: 'app-server-status',
@@ -12,7 +12,11 @@ export class ServerStatusComponent implements OnInit {
   //private intervalId?: ReturnType<typeof setInterval>;
   private destroyRef = inject(DestroyRef); // alternative to OnDestroy on newer Angular versions
 
-  constructor() {}
+  constructor() {
+    effect(() => {
+      console.log(this.currentStatus());
+    });
+  }
 
   ngOnInit() {
     // Simulate fetching server status from an API
