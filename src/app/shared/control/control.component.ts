@@ -34,9 +34,7 @@ export class ControlComponent implements OnInit, AfterContentInit {
   private el = inject(ElementRef);
   // @ContentChild('input') private control?: ElementRef<HTMLInputElement | HTMLTextAreaElement>;
   private control =
-    contentChild.required<ElementRef<HTMLInputElement | HTMLTextAreaElement>>(
-      'input',
-    );
+    contentChild.required<ElementRef<HTMLInputElement | HTMLTextAreaElement>>('input');
 
   constructor() {
     console.log('CONSTRUCTOR');
